@@ -14,6 +14,8 @@
       <ProjectReference Include="..\..\..\..\src\Bemby.AccountModule.Application.Interfaces\Bemby.AccountModule.Application.Interfaces.csproj" />
       <ProjectReference Include="..\..\src\Nytte.Email.Razor\Nytte.Email.Razor.csproj" />
       <ProjectReference Include="..\..\src\Nytte.Email\Nytte.Email.csproj" />
+      <ProjectReference Include="..\Nytte.Email.Sample.Models\Nytte.Email.Sample.Models.csproj" />
+      <ProjectReference Include="..\Nytte.Email.Sample.Views\Nytte.Email.Sample.Views.csproj" />
     </ItemGroup>
 
 </Project>

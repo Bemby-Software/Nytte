@@ -5,6 +5,8 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Nytte.Email.Razor;
+using Nytte.Email.Sample.Models;
+using Nytte.Email.Sample.Views.ViewModels;
 
 namespace Nytte.Email.Sample.Controllers
 {
@@ -29,20 +31,27 @@ namespace Nytte.Email.Sample.Controllers
         [HttpGet]
         public async Task<IEnumerable<WeatherForecast>> Get()
         {
-            await _emailService.SendEmailAsync(new RazorEmailMessageBuilder(),
-                new RazorEmailMessageBlueprint("rob", "robertbennett1998@gmail.com", "Test", "TestEmail"));
-            
-            await _emailService.SendEmailAsync(new RazorEmailMessageBuilder(),
-                new RazorEmailMessageBlueprint<ViewModel>("rob", "robertbennett1998@gmail.com", "Test", "TestEmailWithVm", new ViewModel() { Message="Hello World!" }));
-            
             var rng = new Random();
-            return Enumerable.Range(1, 5).Select(index => new WeatherForecast
+            var forecasts = Enumerable.Range(1, 5).Select(index => new WeatherForecast
                 {
                     Date = DateTime.Now.AddDays(index),
                     TemperatureC = rng.Next(-20, 55),
                     Summary = Summaries[rng.Next(Summaries.Length)]
                 })
                 .ToArray();
+            
+            await _emailService.SendEmailAsync(new RazorEmailMessageBuilder(),
+                new RazorEmailMessageBlueprint("rob", "robertbennett1998@gmail.com", "Nytte Razor Example Email", "NytteRazorExampleEmail"));
+            
+            await _emailService.SendEmailAsync(new RazorEmailMessageBuilder(),
+                new RazorEmailMessageBlueprint<TestEmailWithVmViewModel>("rob", "robertbennett1998@gmail.com", "Test", "TestEmailWithVm", new TestEmailWithVmViewModel() {Message =  "Hello World!"}));
+
+            var forecast = forecasts.First();
+            await _emailService.SendEmailAsync(new RazorEmailMessageBuilder(),
+                new RazorEmailMessageBlueprint<WeatherForecast>("rob", "robertbennett1998@gmail.com", "Weather Forecast", "WeatherForecast", forecast));
+
+
+            return forecasts;
         }
     }
 }

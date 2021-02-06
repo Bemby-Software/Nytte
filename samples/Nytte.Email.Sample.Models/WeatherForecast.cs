@@ -1,6 +1,6 @@
 using System;
 
-namespace Nytte.Email.Sample
+namespace Nytte.Email.Sample.Models
 {
     public class WeatherForecast
     {

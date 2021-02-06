@@ -2,7 +2,7 @@
 
 namespace Nytte.Email.Razor.Views.Shared
 {
-    public class EmailLayout : PageModel
+    public class DefaultNytteRazorEmailLayout : PageModel
     {
         public void OnGet()
         {

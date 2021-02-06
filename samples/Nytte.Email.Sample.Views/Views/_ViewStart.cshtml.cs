@@ -1,8 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace Nytte.Email.Razor.Views
+namespace Nytte.Email.Sample.Views.Views
 {
-    public class TestEmailWithVm : PageModel
+    public class _ViewStart : PageModel
     {
         public void OnGet()
         {
