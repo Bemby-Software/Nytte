@@ -1,12 +1,38 @@
-﻿using EmailValidation;
+﻿using System.Data;
+using System.Threading.Tasks;
+using EmailValidation;
+using MailKit;
+using Microsoft.Extensions.Configuration;
+using MimeKit;
 
 namespace Nytte.Email
 {
     public class EmailService : IEmailService
     {
+        private readonly IEmailServiceSmtpServerConfiguration _serviceSmtpServerConfiguration;
+
+        public EmailService(IEmailServiceSmtpServerConfiguration serviceSmtpServerConfiguration)
+        {
+            _serviceSmtpServerConfiguration = serviceSmtpServerConfiguration;
+        }
+        
         public bool IsValidEmailAddress(string email)
         {
             return !string.IsNullOrWhiteSpace(email) && EmailValidator.Validate(email);
+        }
+
+        public void SendEmail(MimeMessage message)
+        {
+            using var smtpConnection = _serviceSmtpServerConfiguration.CreateConnection();
+            smtpConnection.Send(message);
+            smtpConnection.Disconnect(true);
+        }
+        
+        public async Task SendEmailAsync(MimeMessage message)
+        {
+            using var smtpConnection = await _serviceSmtpServerConfiguration.CreateConnectionAsync();
+            await smtpConnection.SendAsync(message);
+            await smtpConnection.DisconnectAsync(true);
         }
     }
 }
