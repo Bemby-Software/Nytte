@@ -21,11 +21,16 @@
         <PackageReference Include="Microsoft.AspNetCore.Mvc.RazorPages" Version="2.2.5" />
         <PackageReference Include="Microsoft.AspNetCore.Mvc.ViewFeatures" Version="2.2.0" />
         <PackageReference Include="Microsoft.AspNetCore.Routing.Abstractions" Version="2.2.0" />
+        <PackageReference Include="Razor.Templating.Core" Version="1.4.0" />
     </ItemGroup>
 
     <ItemGroup>
       <_ContentIncludedByDefault Remove="wwwroot\background.png" />
       <_ContentIncludedByDefault Remove="wwwroot\exampleJsInterop.js" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\Nytte.Email.Core\Nytte.Email.Core.csproj" />
     </ItemGroup>
 
 </Project>

@@ -17,12 +17,13 @@ namespace Nytte.Email
             
         }
         
-        protected EmailServiceSmtpServerConfiguration(string serverAddress, int serverPort, string serverUserName, string serverPassword)
+        protected EmailServiceSmtpServerConfiguration(string serverAddress, int serverPort, string serverUserName, string serverPassword, SecureSocketOptions connectionSocketOptions)
         {
             ServerAddress = serverAddress;
             ServerPort = serverPort;
             ServerUserName = serverUserName;
             ServerPassword = serverPassword;
+            ConnectionSocketOptions = connectionSocketOptions;
         }
         
         public SmtpClient CreateConnection()

@@ -1,9 +1,11 @@
-﻿using System.Data;
+﻿using System;
+using System.Data;
 using System.Threading.Tasks;
 using EmailValidation;
 using MailKit;
 using Microsoft.Extensions.Configuration;
 using MimeKit;
+using Nytte.Email.Core;
 
 namespace Nytte.Email
 {
@@ -27,12 +29,22 @@ namespace Nytte.Email
             smtpConnection.Send(message);
             smtpConnection.Disconnect(true);
         }
-        
+
+        public void SendEmail<T, TU>(T emailServiceMessageBuilder, TU emailServiceMessageBlueprint) where T : IEmailServiceMessageBuilder where TU : IEmailServiceMessageBlueprint
+        {
+            SendEmail(emailServiceMessageBuilder.BuildMessage(emailServiceMessageBlueprint));
+        }
+
         public async Task SendEmailAsync(MimeMessage message)
         {
             using var smtpConnection = await _serviceSmtpServerConfiguration.CreateConnectionAsync();
             await smtpConnection.SendAsync(message);
             await smtpConnection.DisconnectAsync(true);
+        }
+
+        public async Task SendEmailAsync<T, TU>(T emailServiceMessageBuilder, TU emailServiceMessageBlueprint) where T : IEmailServiceMessageBuilder where TU : IEmailServiceMessageBlueprint
+        {
+            await SendEmailAsync(await emailServiceMessageBuilder.BuildMessageAsync(emailServiceMessageBlueprint));
         }
     }
 }
