@@ -7,18 +7,32 @@ namespace Nytte.Events.Core
 {
     public class EventsFactory : IEventsFactory
     {
+        private readonly EventsOptions _options;
+
+        public EventsFactory(EventsOptions options)
+        {
+            _options = options;
+        }
+        
         public IEventRegistration CreateRegistration<T>(ScopedEventHandlerAsync handler, string key) where T : IEvent 
             => EventRegistration.Create<T>(key, handler);
 
         public string GetEventKey<T>() where T : IEvent
         {
             var eventType = typeof(T);
-            
-            var attribute = eventType.GetAttribute<EventOwnerAttribute>();
 
-            return attribute is null
-                ? eventType.Name
-                : $@"{attribute.Owner.ToLowerInvariant()}/{eventType.Name}";
+            if (_options.UseOwnersInKeys)
+            {
+                var attribute = eventType.GetAttribute<EventOwnerAttribute>();
+                if (attribute is null)
+                {
+                    throw new InvalidOperationException($"A owner attribute is required.");
+                }
+
+                return $"{attribute.Owner}/{eventType.Name}";
+            }
+
+            return eventType.Name;
         }
 
         public ScopedEventHandlerAsync CreateHandler<TEvent>() where TEvent : IEvent

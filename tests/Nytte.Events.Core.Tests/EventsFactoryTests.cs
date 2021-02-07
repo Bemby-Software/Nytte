@@ -7,6 +7,7 @@ using NUnit.Framework.Internal;
 using Nytte.Events.Abstractions;
 using Nytte.Events.Core.Tests.Models;
 using Nytte.Testing;
+using Shouldly;
 
 namespace Nytte.Events.Core.Tests
 {
@@ -15,6 +16,7 @@ namespace Nytte.Events.Core.Tests
         private Mock<IServiceProvider> _serviceProvider;
         private Mock<IServiceScope> _scope;
         private Mock<IEventTransporter> _transporter;
+        private Mock<EventsOptions> _options;
 
         public override void Setup()
         {
@@ -25,6 +27,7 @@ namespace Nytte.Events.Core.Tests
             var scopeFactory = new Mock<IServiceScopeFactory>();
             scopeFactory.Setup(o => o.CreateScope()).Returns(_scope.Object);
             _serviceProvider.Setup(o => o.GetService(typeof(IServiceScopeFactory))).Returns(scopeFactory.Object);
+            _options = Mocker.GetMock<EventsOptions>();
 
         }
 
@@ -61,6 +64,46 @@ namespace Nytte.Events.Core.Tests
             //Assert
             handlerMock.Verify(o => o.HandleAsync(ev));
         }
+
+        [Test]
+        public void GetEventKey_Attribute_GetsKey()
+        {
+            //Arrange
+            var sut = CreateSut();
+
+            //Act
+            var key = sut.GetEventKey<TestEventAttribute>();
+
+            //Assert
+            key.ShouldBe(("main/TestEventAttribute"));
+        }
         
+        [Test]
+        public void GetEventKey_NoAttribute_Throws()
+        {
+            //Arrange
+            var sut = CreateSut();
+
+            //Act
+            //Assert
+            Assert.Throws<InvalidOperationException>(() => sut.GetEventKey<TestEvent>());
+        }
+
+        [Test]
+        public void GetEventKey_NoOwnerMode_GetsKey()
+        {
+            //Arrange
+            var sut = CreateSut();
+            _options.Object.UseOwnersInKeys = false;
+            
+            //Act
+            var key = sut.GetEventKey<TestEvent>();
+            
+            //Assert
+            key.ShouldBe("TestEvent");
+        }
+        
+        
+
     }
 }

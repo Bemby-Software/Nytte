@@ -6,4 +6,10 @@ namespace Nytte.Events.Core.Tests.Models
     {
         
     }
+
+    [EventOwner("main")]
+    public class TestEventAttribute : IEvent
+    {
+        
+    }
 }
