@@ -15,6 +15,7 @@ namespace Nytte.Events.Core
             options?.Invoke(opts);
 
             builder.Services.AddSingleton(opts);
+            builder.Services.AddSingleton<IEventTransporter, JsonEventTransporter>();
             builder.Services.AddSingleton<IEventsFactory, EventsFactory>();
             builder.Services.AddSingleton<IEventsRegistryService, EventsRegistryService>();
             builder.Services.AddSingleton<IEventRegistry, EventRegistry>();

@@ -53,6 +53,8 @@ namespace Nytte.Events.Core
                     throw new InvalidOperationException($"No handler found to handler event {typeof(TEvent).Name}");
                 
                 await handler.HandleAsync(@event);
+                
+                scope?.Dispose();
             };
         }
     }
