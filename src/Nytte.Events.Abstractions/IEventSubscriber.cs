@@ -2,7 +2,7 @@ namespace Nytte.Events.Abstractions
 {
     public interface IEventSubscriber
     {
-        IEventSubscriber Subscribe<TEvent, THandler>()
+        IEventSubscriber Subscribe<TEvent>()
             where TEvent : IEvent;
     }
 }

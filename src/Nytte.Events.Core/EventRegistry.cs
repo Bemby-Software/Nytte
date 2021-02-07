@@ -1,19 +1,16 @@
-using System;
-using System.Collections.Concurrent;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Linq;
 using Nytte.Events.Abstractions;
 
-namespace Nytte.Events.Core.Memory
+namespace Nytte.Events.Core
 {
-    public class MemoryEventRegistry : IEventRegistry
+    public class EventRegistry : IEventRegistry
     {
         private readonly IEventsFactory _eventsFactory;
         private readonly List<IEventRegistration> _events;
         private readonly object _eventsLock = new object();
 
-        public MemoryEventRegistry(IEventsFactory eventsFactory)
+        public EventRegistry(IEventsFactory eventsFactory)
         {
             _eventsFactory = eventsFactory;
             _events = new List<IEventRegistration>();

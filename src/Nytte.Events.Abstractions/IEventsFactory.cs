@@ -4,7 +4,7 @@ namespace Nytte.Events.Abstractions
 {
     public interface IEventsFactory
     {
-        IEventRegistration CreateRegistration<T>(ScopedEventHandlerAsync handler) where T : IEvent;
+        IEventRegistration CreateRegistration<T>(ScopedEventHandlerAsync handler, string key) where T : IEvent;
 
         string GetEventKey<T>() where T : IEvent;
 

@@ -1,6 +1,6 @@
 
 
-namespace Nytte.Events.Core.Memory
+namespace Nytte.Events.Abstractions
 {
     public class MemoryEventsOptions
     {

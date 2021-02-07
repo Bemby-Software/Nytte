@@ -11,6 +11,7 @@
 
     <ItemGroup>
       <ProjectReference Include="..\Nytte.Events.Abstractions\Nytte.Events.Abstractions.csproj" />
+      <ProjectReference Include="..\Nytte\Nytte.csproj" />
     </ItemGroup>
 
     <ItemGroup>

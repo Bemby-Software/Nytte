@@ -1,7 +1,6 @@
 using System.Collections.Generic;
-using Nytte.Events.Abstractions;
 
-namespace Nytte.Events.Core.Memory
+namespace Nytte.Events.Abstractions
 {
     public interface IEventRegistry
     {
