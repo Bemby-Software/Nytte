@@ -2,6 +2,10 @@
 
     <PropertyGroup>
         <TargetFramework>netstandard2.1</TargetFramework>
+        <Title>Nytte.Events.Abstractions</Title>
+        <PackageId>Nytte.Events.Abstractions</PackageId>
+        <PackageTags>Nytte</PackageTags>
+        <RepositoryUrl>https://github.com/mumby0168/Nytte</RepositoryUrl>
     </PropertyGroup>
 
 </Project>

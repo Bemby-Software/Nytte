@@ -2,11 +2,19 @@
 
     <PropertyGroup>
         <TargetFramework>netstandard2.1</TargetFramework>
-        <RootNamespace>Nytte.Events</RootNamespace>
+        <Title>Nytte.Events.Core</Title>
+        <PackageId>Nytte.Events.Core</PackageId>
+        <PackageTags>Nytte</PackageTags>
+        <RepositoryUrl>https://github.com/mumby0168/Nytte</RepositoryUrl>
+        <LangVersion>9</LangVersion>
     </PropertyGroup>
 
     <ItemGroup>
       <ProjectReference Include="..\Nytte.Events.Abstractions\Nytte.Events.Abstractions.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="5.0.0" />
     </ItemGroup>
 
 </Project>
