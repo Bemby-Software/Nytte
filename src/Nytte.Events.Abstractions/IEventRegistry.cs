@@ -7,5 +7,6 @@ namespace Nytte.Events.Abstractions
         void Add(IEventRegistration registration);
 
         IReadOnlyList<IEventRegistration> GetRegistrations<T>() where T : IEvent;
+
     }
 }

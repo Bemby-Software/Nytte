@@ -102,8 +102,23 @@ namespace Nytte.Events.Core.Tests
             //Assert
             key.ShouldBe("TestEvent");
         }
-        
-        
+
+        [Test]
+        public void CreateRegistration_Always_CreatesRegistration()
+        {
+            //Arrange
+            var sut = CreateSut();
+            var key = "key";
+            var handler = new ScopedEventHandlerAsync((provider, @event) => Task.CompletedTask);
+            
+            //Act
+            var res = sut.CreateRegistration<TestEvent>(handler, key);
+            
+            //Assert
+            res.Key.ShouldBe(key);
+            res.AsyncHandler.ShouldBe(handler);
+            res.Type.ShouldBe(typeof(TestEvent));
+        }
 
     }
 }

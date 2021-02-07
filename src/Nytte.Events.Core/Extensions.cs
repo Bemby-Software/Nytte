@@ -1,10 +1,12 @@
 using System;
+using System.Diagnostics.CodeAnalysis;
 using Microsoft.Extensions.DependencyInjection;
 using Nytte.Events.Abstractions;
 using Nytte.Events.Core.Memory;
 
 namespace Nytte.Events.Core
 {
+    [ExcludeFromCodeCoverage]
     public static class Extensions
     {
         public static INytteBuilder AddEventsCore(this INytteBuilder builder, Action<EventsOptions> options)
