@@ -1,1 +1,2 @@
-GET http://localhost:5000/send?message=billy
+GET http://localhost:5000/send?message=
+
