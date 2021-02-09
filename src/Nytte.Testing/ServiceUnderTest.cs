@@ -10,6 +10,7 @@ namespace Nytte.Testing
         public virtual void NUnitSetup()
         {
             Mocker = new AutoMocker();
+            Setup();
         }
 
         protected AutoMocker Mocker;

@@ -11,5 +11,11 @@ namespace Nytte
             services.AddSingleton<IJson, Json>();
             return new NytteBuilder(services);
         }
+
+        public static T GetAttribute<T>(this Type type) where T : Attribute
+        {
+            var att = (T) Attribute.GetCustomAttribute(type, typeof(T));
+            return att;
+        }
     }
 }
