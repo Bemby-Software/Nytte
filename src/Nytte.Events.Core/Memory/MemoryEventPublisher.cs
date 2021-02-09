@@ -24,15 +24,15 @@ namespace Nytte.Events.Core.Memory
         {
             var packedEvent = await _transporter.PackAsync(@event);
 
-            var handlers = _registry.GetRegistrations<TEvent>();
+            var registrations = _registry.GetRegistrations<TEvent>();
 
             if (_options.UseStrictMode)
             {
-                if (!handlers.Any())
+                if (!registrations.Any())
                     throw new InvalidOperationException($"No event handlers for event {@event.GetType().FullName}");
             }
 
-            foreach (var eventRegistration in handlers)
+            foreach (var eventRegistration in registrations)
             {
                 await eventRegistration.AsyncHandler(_serviceProvider, packedEvent);
             }

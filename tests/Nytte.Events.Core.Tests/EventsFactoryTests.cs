@@ -1,4 +1,6 @@
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.Extensions.DependencyInjection;
 using Moq;
@@ -28,6 +30,7 @@ namespace Nytte.Events.Core.Tests
             scopeFactory.Setup(o => o.CreateScope()).Returns(_scope.Object);
             _serviceProvider.Setup(o => o.GetService(typeof(IServiceScopeFactory))).Returns(scopeFactory.Object);
             _options = Mocker.GetMock<EventsOptions>();
+            _serviceProvider.Setup(o => o.GetService(typeof(EventsOptions))).Returns(_options.Object);
 
         }
 
@@ -54,7 +57,10 @@ namespace Nytte.Events.Core.Tests
             var packedEvent = "packedEvent";
             var handlerMock = new Mock<IEventHandler<TestEvent>>();
             var ev = new TestEvent();
-            _serviceProvider.Setup(o => o.GetService(typeof(IEventHandler<TestEvent>))).Returns(handlerMock.Object);
+            _serviceProvider.Setup(o => o
+                    .GetService(typeof(IEnumerable<IEventHandler<TestEvent>>)))
+                .Returns(new List<IEventHandler<TestEvent>>{handlerMock.Object}.AsEnumerable());
+            
             _transporter.Setup(o => o.UnPackAsync<TestEvent>(packedEvent)).ReturnsAsync(ev);
 
             //Act
