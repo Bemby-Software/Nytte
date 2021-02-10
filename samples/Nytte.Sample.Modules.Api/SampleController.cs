@@ -2,7 +2,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Nytte.Sample.ModuleB;
 
-namespace Nytte.Sample.Events.Api
+namespace Nytte.Sample.Modules.Api
 {
     [ApiController]
     public class SampleController : ControllerBase

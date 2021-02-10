@@ -7,22 +7,22 @@ namespace Nytte.Modules.Requests
 {
     public class ModuleRequestFactory : IModuleRequestFactory
     {
-        public ScopedRequestHandlerDelegateAsync CreateHandler<TReturns, TQuery>() where TReturns : class where TQuery : IModuleQuery
+        public ScopedRequestHandlerDelegateAsync CreateHandler<TReturns, TRequest>() where TReturns : class where TRequest : IModuleRequest
         {
             return async (provider, packedRequest) =>
             {
                 var json = provider.GetRequiredService<IJson>();
 
-                var query = await json.DeserializeAsync<TQuery>(packedRequest);
+                var query = await json.DeserializeAsync<TRequest>(packedRequest);
 
                 using var scope = provider.CreateScope();
 
-                var handler = scope.ServiceProvider.GetRequiredService<IModuleQueryHandler<TReturns, TQuery>>();
+                var handler = scope.ServiceProvider.GetRequiredService<IModuleRequestHandler<TReturns, TRequest>>();
 
                 if (handler is null)
                 {
                     throw new InvalidOperationException(
-                        $"There is no request handler defined for query {typeof(TQuery).FullName} with return type {typeof(TReturns).FullName}.");
+                        $"There is no request handler defined for query {typeof(TRequest).FullName} with return type {typeof(TReturns).FullName}.");
                 }
 
                 var result = await handler.HandleAsync(query);
@@ -30,9 +30,9 @@ namespace Nytte.Modules.Requests
             };
         }
 
-        public string GetKey<TReturns, TQuery>() where TReturns : class where TQuery : IModuleQuery
+        public string GetKey<TReturns, TRequest>() where TReturns : class where TRequest : IModuleRequest
         {
-            var queryType = typeof(TQuery);
+            var queryType = typeof(TRequest);
             var returnType = typeof(TReturns);
 
             var owner = queryType.GetAttribute<ModuleOwnerAttribute>();
@@ -45,7 +45,7 @@ namespace Nytte.Modules.Requests
 
         public IModuleRequestSpecification Create<TReturns, TQuery>(string key, ScopedRequestHandlerDelegateAsync handler) 
             where TReturns : class 
-            where TQuery : IModuleQuery 
+            where TQuery : IModuleRequest 
             => new ModuleRequestSpecification(handler, typeof(TReturns), typeof(TQuery), key);
     }
 }

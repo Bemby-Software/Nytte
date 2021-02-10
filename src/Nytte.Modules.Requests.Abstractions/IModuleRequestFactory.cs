@@ -2,16 +2,16 @@ namespace Nytte.Modules.Requests.Abstractions
 {
     public interface IModuleRequestFactory
     {
-        ScopedRequestHandlerDelegateAsync CreateHandler<TReturns, TQuery>()
-            where TQuery : IModuleQuery
+        ScopedRequestHandlerDelegateAsync CreateHandler<TReturns, TRequest>()
+            where TRequest : IModuleRequest
             where TReturns : class;
 
-        string GetKey<TReturns, TQuery>()
-            where TQuery : IModuleQuery
+        string GetKey<TReturns, TRequest>()
+            where TRequest : IModuleRequest
             where TReturns : class;
 
-        IModuleRequestSpecification Create<TReturns, TQuery>(string key, ScopedRequestHandlerDelegateAsync handler)
-            where TQuery : IModuleQuery
+        IModuleRequestSpecification Create<TReturns, TRequest>(string key, ScopedRequestHandlerDelegateAsync handler)
+            where TRequest : IModuleRequest
             where TReturns : class;
     }
 }

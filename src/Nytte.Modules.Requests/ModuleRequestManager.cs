@@ -13,13 +13,13 @@ namespace Nytte.Modules.Requests
             _factory = factory;
         }
 
-        public void RegisterQueryHandler<TReturns, TQuery>() where TReturns : class where TQuery : IModuleQuery
+        public void RegisterRequestHandler<TReturns, TRequest>() where TReturns : class where TRequest : IModuleRequest
         {
-            var key = _factory.GetKey<TReturns, TQuery>();
+            var key = _factory.GetKey<TReturns, TRequest>();
             
-            var handler = _factory.CreateHandler<TReturns, TQuery>();
+            var handler = _factory.CreateHandler<TReturns, TRequest>();
 
-            var spec = _factory.Create<TReturns, TQuery>(key, handler);
+            var spec = _factory.Create<TReturns, TRequest>(key, handler);
             
             _registry.Add(spec);
         }

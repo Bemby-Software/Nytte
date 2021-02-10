@@ -40,9 +40,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "events", "events", "{49D2F5
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nytte.Events.Core.Tests", "tests\Nytte.Events.Core.Tests\Nytte.Events.Core.Tests.csproj", "{BED8F740-2480-446C-985E-F8B9FC6C75FE}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "events", "events", "{B6B08A4B-7102-4B2D-804A-33E193190591}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "modules", "modules", "{B6B08A4B-7102-4B2D-804A-33E193190591}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nytte.Sample.Events.Api", "samples\Nytte.Sample.Events.Api\Nytte.Sample.Events.Api.csproj", "{B4B01833-A6C0-4B4B-A439-F2EB4AF2741A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nytte.Sample.Modules.Api", "samples\Nytte.Sample.Modules.Api\Nytte.Sample.Modules.Api.csproj", "{B4B01833-A6C0-4B4B-A439-F2EB4AF2741A}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nytte.Sample.ModuleA", "samples\Nytte.Sample.ModuleA\Nytte.Sample.ModuleA.csproj", "{FD71C5CB-3F59-4989-ACBD-4696A4750E4B}"
 EndProject

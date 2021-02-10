@@ -17,9 +17,9 @@ namespace Nytte.Modules.Requests
             _requests = new List<IModuleRequestSpecification>();
         }
         
-        public IModuleRequestSpecification GetRequest<TReturns, TQuery>() where TReturns : class where TQuery : IModuleQuery
+        public IModuleRequestSpecification GetRequest<TReturns, TRequest>() where TReturns : class where TRequest : IModuleRequest
         {
-            var key = _factory.GetKey<TReturns, TQuery>();
+            var key = _factory.GetKey<TReturns, TRequest>();
 
             IModuleRequestSpecification spec;
             

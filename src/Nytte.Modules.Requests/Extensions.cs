@@ -15,12 +15,12 @@ namespace Nytte.Modules.Requests
             return builder;
         }
 
-        public static INytteBuilder AddModuleQueryHandler<TReturns, TQuery, THandler>(this INytteBuilder builder)
+        public static INytteBuilder AddModuleRequestHandler<TReturns, TRequest, THandler>(this INytteBuilder builder)
         where TReturns : class
-        where TQuery : IModuleQuery
-        where THandler : class, IModuleQueryHandler<TReturns, TQuery>
+        where TRequest : IModuleRequest
+        where THandler : class, IModuleRequestHandler<TReturns, TRequest>
         {
-            builder.Services.AddScoped<IModuleQueryHandler<TReturns, TQuery>, THandler>();
+            builder.Services.AddScoped<IModuleRequestHandler<TReturns, TRequest>, THandler>();
             return builder;
         }
 

@@ -4,8 +4,8 @@ namespace Nytte.Modules.Requests.Abstractions
 {
     public interface IModuleClient
     {
-        Task<TReturns> GetAsync<TReturns, TQuery>(TQuery query)
-            where TQuery : IModuleQuery
+        Task<TReturns> GetAsync<TReturns, TRequest>(TRequest query)
+            where TRequest : IModuleRequest
             where TReturns : class;
     }
 }

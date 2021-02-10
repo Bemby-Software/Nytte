@@ -18,9 +18,9 @@ namespace Nytte.Modules.Requests
             _json = json;
         }
         
-        public async Task<TReturns> GetAsync<TReturns, TQuery>(TQuery query) where TReturns : class where TQuery : IModuleQuery
+        public async Task<TReturns> GetAsync<TReturns, TRequest>(TRequest query) where TReturns : class where TRequest : IModuleRequest
         {
-            var spec = _registry.GetRequest<TReturns, TQuery>();
+            var spec = _registry.GetRequest<TReturns, TRequest>();
 
             var packed = await _json.SerializeAsync(query);
 
