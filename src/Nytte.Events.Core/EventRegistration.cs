@@ -22,4 +22,4 @@ namespace Nytte.Events.Core
         public static IEventRegistration Create<TEvent>(string key, ScopedEventHandlerAsync asyncHandler) 
             => new EventRegistration(typeof(TEvent), key, asyncHandler);
     }
-}   
+}

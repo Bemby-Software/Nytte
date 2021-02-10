@@ -10,8 +10,6 @@
 
     <ItemGroup>
       <ProjectReference Include="..\..\src\Nytte.Events.Core\Nytte.Events.Core.csproj" />
-      <ProjectReference Include="..\..\src\Nytte.Modules.Requests.Abstractions\Nytte.Modules.Requests.Abstractions.csproj" />
-      <ProjectReference Include="..\..\src\Nytte.Modules.Requests\Nytte.Modules.Requests.csproj" />
       <ProjectReference Include="..\..\src\Nytte\Nytte.csproj" />
     </ItemGroup>
 

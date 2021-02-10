@@ -3,7 +3,6 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 using Nytte.Events.Abstractions;
 using Nytte.Events.Core.Memory;
-using Nytte.Modules.Requests.Abstractions;
 using Nytte.Sample.ModuleA.Events;
 using Nytte.Sample.ModuleA.Events.External;
 
@@ -14,8 +13,7 @@ namespace Nytte.Sample.ModuleA
         public static IServiceCollection AddModuleA(this IServiceCollection services)
         {
             services.AddNytte()
-                .AddInMemoryEventsBus()
-                .AddModuleRequests();
+                .AddInMemoryEventsBus();
 
             services.AddScoped<IEventHandler<SampleMessage>, SampleMessageEventHandler>();
 
