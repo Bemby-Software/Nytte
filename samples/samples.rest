@@ -1,2 +1,6 @@
-GET http://localhost:5000/send?message=
+GET http://localhost:5000/send?message=hello-world
+
+### get username
+
+GET http://localhost:5000/username/f6a996c6-c8f8-4439-84ed-cc6c3c6fe2dd
 

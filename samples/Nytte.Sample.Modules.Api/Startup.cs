@@ -1,10 +1,5 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Nytte.Events.Abstractions;
@@ -12,7 +7,7 @@ using Nytte.Sample.ModuleA;
 using Nytte.Sample.ModuleA.Events.External;
 using Nytte.Sample.ModuleB;
 
-namespace Nytte.Sample.Events.Api
+namespace Nytte.Sample.Modules.Api
 {
     public class Startup
     {
