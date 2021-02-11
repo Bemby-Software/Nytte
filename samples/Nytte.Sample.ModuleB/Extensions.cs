@@ -14,6 +14,7 @@ namespace Nytte.Sample.ModuleB
                 .AddInMemoryEventsBus();
 
             services.AddScoped<ModuleBService>();
+            services.AddScoped<ModuleAProxy>();
             
             return services;
         }

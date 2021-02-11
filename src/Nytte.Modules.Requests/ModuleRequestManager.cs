@@ -13,7 +13,7 @@ namespace Nytte.Modules.Requests
             _factory = factory;
         }
 
-        public void RegisterRequestHandler<TReturns, TRequest>() where TReturns : class where TRequest : IModuleRequest
+        public void UseRequest<TReturns, TRequest>() where TReturns : class where TRequest : IModuleRequest
         {
             var key = _factory.GetKey<TReturns, TRequest>();
             
