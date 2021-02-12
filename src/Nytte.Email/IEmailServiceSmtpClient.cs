@@ -4,7 +4,7 @@ using MailKit.Net.Smtp;
 
 namespace Nytte.Email
 {
-    public interface IEmailServiceSmtpServerConfiguration
+    public interface IEmailServiceSmtpClient
     {
         public string ServerAddress { set; }
         public int ServerPort { set; }

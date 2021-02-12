@@ -9,10 +9,10 @@ namespace Nytte.Email
         bool IsValidEmailAddress(string email);
         void SendEmail(MimeMessage message);
 
-        void SendEmail<T, TU>(T emailServiceMessageBuilder, TU emailServiceMessageBlueprint)  where T : IEmailServiceMessageBuilder 
-                                                                                            where TU : IEmailServiceMessageBlueprint;
+        void SendEmail<TBuilder, TBlueprint>(TBuilder emailServiceMessageBuilder, TBlueprint emailServiceMessageBlueprint)  where TBuilder : IEmailServiceMessageBuilder 
+                                                                                            where TBlueprint : IEmailServiceMessageBlueprint;
         Task SendEmailAsync(MimeMessage message);
-        Task SendEmailAsync<T, TU>(T emailServiceMessageBuilder, TU emailServiceMessageBlueprint)  where T : IEmailServiceMessageBuilder 
-            where TU : IEmailServiceMessageBlueprint;
+        Task SendEmailAsync<TBuilder, TBlueprint>(TBuilder emailServiceMessageBuilder, TBlueprint emailServiceMessageBlueprint)  where TBuilder : IEmailServiceMessageBuilder 
+            where TBlueprint : IEmailServiceMessageBlueprint;
     }
 }
