@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using Nytte.Email.Abstractions;
 using Nytte.Email.Razor;
 using Nytte.Email.Sample.Models;
 using Nytte.Email.Sample.Views.ViewModels;

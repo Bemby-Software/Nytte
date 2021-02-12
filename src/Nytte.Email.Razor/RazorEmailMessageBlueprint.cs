@@ -1,9 +1,9 @@
 ﻿using System;
-using Nytte.Email.Core;
+using Nytte.Email.Abstractions;
 
 namespace Nytte.Email.Razor
 {
-    public class RazorEmailMessageBlueprint : IEmailServiceMessageBlueprint
+    public class RazorEmailMessageBlueprint : IRazorEmailMessageBlueprint
     {
         public RazorEmailMessageBlueprint(string recipientName, string recipientEmailAddress, string emailSubject, string razorViewName, object razorViewModel=null, Type razorViewModelType=null)
         {
@@ -18,9 +18,9 @@ namespace Nytte.Email.Razor
         public string RecipientName { get; }
         public string RecipientEmailAddress { get; }
         public string EmailSubject { get; }
-        public string RazorViewName { get; set; }
-        public object RazorViewModel { get; set; }
-        public Type RazorViewModelType { get; set; }
+        public string RazorViewName { get; }
+        public object RazorViewModel { get; }
+        public Type RazorViewModelType { get; }
     }
     
     public class RazorEmailMessageBlueprint<T> : RazorEmailMessageBlueprint

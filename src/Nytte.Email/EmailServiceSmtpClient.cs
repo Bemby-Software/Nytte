@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using MailKit.Net.Smtp;
 using MailKit.Security;
 using Microsoft.Extensions.Options;
+using Nytte.Email.Abstractions;
 
 namespace Nytte.Email
 {

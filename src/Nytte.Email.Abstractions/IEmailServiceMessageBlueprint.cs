@@ -1,4 +1,4 @@
-﻿namespace Nytte.Email.Core
+﻿namespace Nytte.Email.Abstractions
 {
     public interface IEmailServiceMessageBlueprint
     {

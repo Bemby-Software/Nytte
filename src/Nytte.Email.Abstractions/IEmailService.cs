@@ -1,8 +1,7 @@
 ﻿using System.Threading.Tasks;
 using MimeKit;
-using Nytte.Email.Core;
 
-namespace Nytte.Email
+namespace Nytte.Email.Abstractions
 {
     public interface IEmailService
     {

@@ -1,5 +1,6 @@
 ﻿using Moq.AutoMock;
 using NUnit.Framework;
+using Nytte.Email.Abstractions;
 using Nytte.Testing;
 using Shouldly;
 

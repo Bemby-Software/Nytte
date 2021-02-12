@@ -1,4 +1,4 @@
-﻿using Nytte.Email.Core;
+﻿using Nytte.Email.Abstractions;
 
 namespace Nytte.Email.Razor
 {

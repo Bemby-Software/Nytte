@@ -14,7 +14,7 @@
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\Nytte.Email.Core\Nytte.Email.Core.csproj" />
+      <ProjectReference Include="..\Nytte.Email.Abstractions\Nytte.Email.Abstractions.csproj" />
     </ItemGroup>
 
 </Project>

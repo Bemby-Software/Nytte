@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Nytte.Email.Core
+namespace Nytte.Email.Exceptions
 {
     public class UnsupportedEmailServiceMessageBlueprintTypeException : Exception
     {

@@ -5,7 +5,7 @@ using EmailValidation;
 using MailKit;
 using Microsoft.Extensions.Configuration;
 using MimeKit;
-using Nytte.Email.Core;
+using Nytte.Email.Abstractions;
 
 namespace Nytte.Email
 {

@@ -3,7 +3,8 @@ using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
 using MimeKit;
-using Nytte.Email.Core;
+using Nytte.Email.Abstractions;
+using Nytte.Email.Exceptions;
 using Razor.Templating.Core;
 
 namespace Nytte.Email.Razor
@@ -32,18 +33,7 @@ namespace Nytte.Email.Razor
             var bodyBuilder = new BodyBuilder();
             if (blueprint.RazorViewModelType is not null)
             {
-                var renderMethodInfo = typeof(RazorTemplateEngine).GetMethods()
-                                                                    .Where(x => x.Name == "RenderAsync")
-                                                                    .FirstOrDefault(x => x.IsGenericMethod);
-                if (renderMethodInfo is not null)
-                {
-
-                    var renderMethodInstance = renderMethodInfo.MakeGenericMethod(blueprint.RazorViewModelType);
-                    // ReSharper disable once PossibleNullReferenceException
-
-                    bodyBuilder.HtmlBody = await (Task<string>) renderMethodInstance.Invoke(null,
-                        new[] {blueprint.RazorViewName, blueprint.RazorViewModel});
-                }
+                bodyBuilder.HtmlBody = await RazorTemplateEngine.RenderAsync(blueprint.RazorViewName, blueprint.RazorViewModel);
             }
             else
             {

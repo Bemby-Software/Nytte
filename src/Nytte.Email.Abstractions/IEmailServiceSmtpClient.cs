@@ -1,8 +1,7 @@
-﻿using System.Reflection.Metadata.Ecma335;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using MailKit.Net.Smtp;
 
-namespace Nytte.Email
+namespace Nytte.Email.Abstractions
 {
     public interface IEmailServiceSmtpClient
     {
