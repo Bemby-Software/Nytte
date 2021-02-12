@@ -13,7 +13,28 @@ namespace Nytte.Email.Razor
     {
         public MimeMessage BuildMessage<T>(T messageBlueprint) where T : IEmailServiceMessageBlueprint
         {
-            throw new System.NotImplementedException();
+            var blueprint = messageBlueprint as RazorEmailMessageBlueprint;
+            if (blueprint is null)
+                throw new UnsupportedEmailServiceMessageBlueprintTypeException(typeof(T),
+                    new[] {typeof(RazorEmailMessageBlueprint)});
+
+            MimeMessage email = new MimeMessage();
+
+            email.To.Add(new MailboxAddress(blueprint.RecipientName, blueprint.RecipientEmailAddress));
+            email.From.Add(new MailboxAddress("Rob", "robertbennett1998@outlook.com"));
+            email.Subject = blueprint.EmailSubject;
+
+            
+            var bodyBuilder = new BodyBuilder();
+            Task<string> renderAsyncTask = blueprint.RazorViewModelType is not null ? RazorTemplateEngine.RenderAsync(blueprint.RazorViewName, blueprint.RazorViewModel) 
+                                                                                    : RazorTemplateEngine.RenderAsync(blueprint.RazorViewName);
+            
+            renderAsyncTask.Wait();
+            
+            bodyBuilder.HtmlBody = renderAsyncTask.Result;
+            email.Body = bodyBuilder.ToMessageBody();
+            
+            return email;
         }
 
         public async Task<MimeMessage> BuildMessageAsync<T>(T messageBlueprint) where T : IEmailServiceMessageBlueprint
