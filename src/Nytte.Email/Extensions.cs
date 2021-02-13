@@ -8,6 +8,13 @@ namespace Nytte.Email
 {
     public static class Extensions
     {
+        private static void ConfigureStandardServices(IServiceCollection services)
+        {
+            services.AddSingleton<IEmailService, EmailService>();
+            services.AddSingleton<IEmailBuilderRegister, EmailBuilderRegister>();
+            services.AddSingleton<IEmailBuilderFactory, EmailBuilderFactory>();
+        }
+        
         public static IServiceCollection NytteEmailConfigureSmtpServer(this IServiceCollection services, IConfiguration configuration, string section="SmtpServerConfiguration")
         {
             services.AddOptions();
@@ -16,11 +23,11 @@ namespace Nytte.Email
             return services;
         }
         
-        public static IServiceCollection AddNytteEmails(this IServiceCollection services, Func<SmtpServerConfiguration> configureSmtpServer)
+        public static IServiceCollection AddNytteEmail(this IServiceCollection services, Func<SmtpServerConfiguration> configureSmtpServer)
         {
             var smtpServerConfiguration = configureSmtpServer.Invoke();
             
-            services.AddSingleton<IEmailService, EmailService>();
+            ConfigureStandardServices(services);
             
             var smtpClient = new EmailServiceSmtpClient(smtpServerConfiguration);
             services.AddSingleton<IEmailServiceSmtpClient>(smtpClient);
@@ -28,9 +35,9 @@ namespace Nytte.Email
             return services;
         }
         
-        public static IServiceCollection AddNytteEmails(this IServiceCollection services, SmtpServerConfiguration smtpServerConfiguration)
+        public static IServiceCollection AddNytteEmail(this IServiceCollection services, SmtpServerConfiguration smtpServerConfiguration)
         {
-            services.AddSingleton<IEmailService, EmailService>();
+            ConfigureStandardServices(services);
             
             var smtpClient = new EmailServiceSmtpClient(smtpServerConfiguration);
             services.AddSingleton<IEmailServiceSmtpClient>(smtpClient);
@@ -40,7 +47,7 @@ namespace Nytte.Email
         
         public static IServiceCollection AddNytteEmail(this IServiceCollection services)
         {
-            services.AddSingleton<IEmailService, EmailService>();
+            ConfigureStandardServices(services);
             services.AddSingleton<IEmailServiceSmtpClient, EmailServiceSmtpClient>();
             
             return services;

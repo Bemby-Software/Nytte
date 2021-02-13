@@ -27,6 +27,7 @@
     <ItemGroup>
       <ProjectReference Include="..\Nytte.Email.Abstractions\Nytte.Email.Abstractions.csproj" />
       <ProjectReference Include="..\Nytte.Email.Exceptions\Nytte.Email.Exceptions.csproj" />
+      <ProjectReference Include="..\Nytte.Email.Razor.Abstractions\Nytte.Email.Razor.Abstractions.csproj" />
     </ItemGroup>
 
 </Project>

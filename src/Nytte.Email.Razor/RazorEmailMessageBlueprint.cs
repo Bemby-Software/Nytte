@@ -1,5 +1,6 @@
 ﻿using System;
 using Nytte.Email.Abstractions;
+using Nytte.Email.Razor.Abstractions;
 
 namespace Nytte.Email.Razor
 {

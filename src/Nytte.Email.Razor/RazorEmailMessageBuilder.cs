@@ -1,16 +1,20 @@
-﻿using System;
-using System.Linq;
-using System.Reflection;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using MimeKit;
 using Nytte.Email.Abstractions;
 using Nytte.Email.Exceptions;
-using Razor.Templating.Core;
+using Nytte.Email.Razor.Abstractions;
 
 namespace Nytte.Email.Razor
 {
     public class RazorEmailMessageBuilder : IRazorEmailMessageBuilder
     {
+        private readonly IRazorPageStringRenderer _razorPageStringRenderer;
+
+        public RazorEmailMessageBuilder(IRazorPageStringRenderer razorPageStringRenderer)
+        {
+            _razorPageStringRenderer = razorPageStringRenderer;
+        }
+        
         public MimeMessage BuildMessage<T>(T messageBlueprint) where T : IEmailServiceMessageBlueprint
         {
             var blueprint = messageBlueprint as RazorEmailMessageBlueprint;
@@ -26,12 +30,9 @@ namespace Nytte.Email.Razor
 
             
             var bodyBuilder = new BodyBuilder();
-            Task<string> renderAsyncTask = blueprint.RazorViewModelType is not null ? RazorTemplateEngine.RenderAsync(blueprint.RazorViewName, blueprint.RazorViewModel) 
-                                                                                    : RazorTemplateEngine.RenderAsync(blueprint.RazorViewName);
+            bodyBuilder.HtmlBody = blueprint.RazorViewModelType is not null ? _razorPageStringRenderer.Render(blueprint.RazorViewName, blueprint.RazorViewModel) 
+                                                                            : _razorPageStringRenderer.Render(blueprint.RazorViewName);
             
-            renderAsyncTask.Wait();
-            
-            bodyBuilder.HtmlBody = renderAsyncTask.Result;
             email.Body = bodyBuilder.ToMessageBody();
             
             return email;
@@ -54,11 +55,11 @@ namespace Nytte.Email.Razor
             var bodyBuilder = new BodyBuilder();
             if (blueprint.RazorViewModelType is not null)
             {
-                bodyBuilder.HtmlBody = await RazorTemplateEngine.RenderAsync(blueprint.RazorViewName, blueprint.RazorViewModel);
+                bodyBuilder.HtmlBody = await _razorPageStringRenderer.RenderAsync(blueprint.RazorViewName, blueprint.RazorViewModel);
             }
             else
             {
-                bodyBuilder.HtmlBody = await RazorTemplateEngine.RenderAsync(blueprint.RazorViewName);
+                bodyBuilder.HtmlBody = await _razorPageStringRenderer.RenderAsync(blueprint.RazorViewName);
             }
             
             email.Body = bodyBuilder.ToMessageBody();

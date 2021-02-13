@@ -11,10 +11,12 @@ namespace Nytte.Email
 {
     public class EmailService : IEmailService
     {
+        private readonly IEmailBuilderFactory _emailBuilderFactory;
         private readonly IEmailServiceSmtpClient _emailServiceSmtpClient;
 
-        public EmailService(IEmailServiceSmtpClient emailServiceSmtpClient)
+        public EmailService(IEmailBuilderFactory emailBuilderFactory, IEmailServiceSmtpClient emailServiceSmtpClient)
         {
+            _emailBuilderFactory = emailBuilderFactory;
             _emailServiceSmtpClient = emailServiceSmtpClient;
         }
 
@@ -37,14 +39,14 @@ namespace Nytte.Email
             await smtpConnection.DisconnectAsync(true);
         }
         
-        public void SendEmail<T, TU>(T emailServiceMessageBuilder, TU emailServiceMessageBlueprint) where T : IEmailServiceMessageBuilder where TU : IEmailServiceMessageBlueprint
+        public void SendEmail<TBlueprint>(TBlueprint emailServiceMessageBlueprint) where TBlueprint : IEmailServiceMessageBlueprint
         {
-            SendEmail(emailServiceMessageBuilder.BuildMessage(emailServiceMessageBlueprint));
+            SendEmail(_emailBuilderFactory.ResolveBuilder<TBlueprint>().BuildMessage(emailServiceMessageBlueprint));
         }
         
-        public async Task SendEmailAsync<T, TU>(T emailServiceMessageBuilder, TU emailServiceMessageBlueprint) where T : IEmailServiceMessageBuilder where TU : IEmailServiceMessageBlueprint
+        public async Task SendEmailAsync<TBlueprint>(TBlueprint emailServiceMessageBlueprint) where TBlueprint : IEmailServiceMessageBlueprint
         {
-            await SendEmailAsync(await emailServiceMessageBuilder.BuildMessageAsync(emailServiceMessageBlueprint));
+            await SendEmailAsync(await _emailBuilderFactory.ResolveBuilder<TBlueprint>().BuildMessageAsync(emailServiceMessageBlueprint));
         }
     }
 }

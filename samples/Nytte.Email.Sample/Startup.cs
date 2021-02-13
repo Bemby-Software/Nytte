@@ -24,7 +24,7 @@ namespace Nytte.Email.Sample
             services.NytteEmailConfigureSmtpServer(Configuration)
                     .AddNytteEmail()
                     .AddNytteRazorEmails();
-            
+
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo {Title = "Nytte Email Sample", Version = "v1"});

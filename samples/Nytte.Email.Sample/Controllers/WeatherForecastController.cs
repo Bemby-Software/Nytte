@@ -41,15 +41,12 @@ namespace Nytte.Email.Sample.Controllers
                 })
                 .ToArray();
             
-            await _emailService.SendEmailAsync(new RazorEmailMessageBuilder(),
-                new RazorEmailMessageBlueprint("rob", "robertbennett1998@gmail.com", "Nytte Razor Example Email", "NytteRazorExampleEmail"));
+            await _emailService.SendEmailAsync(new RazorEmailMessageBlueprint("rob", "robertbennett1998@gmail.com", "Nytte Razor Example Email", "NytteRazorExampleEmail"));
             
-            await _emailService.SendEmailAsync(new RazorEmailMessageBuilder(),
-                new RazorEmailMessageBlueprint<TestEmailWithVmViewModel>("rob", "robertbennett1998@gmail.com", "Test", "TestEmailWithVm", new TestEmailWithVmViewModel() {Message =  "Hello World!"}));
+            await _emailService.SendEmailAsync(new RazorEmailMessageBlueprint<TestEmailWithVmViewModel>("rob", "robertbennett1998@gmail.com", "Test", "TestEmailWithVm", new TestEmailWithVmViewModel() {Message =  "Hello World!"}));
 
             var forecast = forecasts.First();
-            await _emailService.SendEmailAsync(new RazorEmailMessageBuilder(),
-                new RazorEmailMessageBlueprint<WeatherForecast>("rob", "robertbennett1998@gmail.com", "Weather Forecast", "WeatherForecast", forecast));
+            await _emailService.SendEmailAsync(new RazorEmailMessageBlueprint<WeatherForecast>("rob", "robertbennett1998@gmail.com", "Weather Forecast", "WeatherForecast", forecast));
 
 
             return forecasts;
