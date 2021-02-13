@@ -1,0 +1,21 @@
+﻿@model Nytte.Email.Sample.Models.WeatherForecast
+
+@{
+    ViewData["EmailTitle"] = "Weather Forecast!";
+}
+<p>
+    Date: @Model.Date
+</p>
+<br />
+<p>
+    Temperature: @Model.TemperatureC Degrees Celcius
+</p>
+<br />
+<p>
+    Temperature: @Model.TemperatureF Degrees Fahrenheit
+</p>
+<br />
+<p>
+    Summary: @Model.Summary
+</p>
+<br />
